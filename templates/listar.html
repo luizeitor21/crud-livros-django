@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Catálogo de Livros</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Meus Livros</h2>
+        <a href="{% url 'criar' %}" class="btn">Adicionar Novo Livro</a>
+        <br><br>
+
+        {% for livro in livros %}
+            <div class="livro-item">
+                <span><strong>{{ livro.titulo }}</strong> - {{ livro.autor }}</span>
+                <div>
+                    <a href="{% url 'editar' livro.id %}" class="btn">Editar</a>
+                    <a href="{% url 'deletar' livro.id %}" class="btn btn-danger">Apagar</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Nenhum livro cadastrado.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
